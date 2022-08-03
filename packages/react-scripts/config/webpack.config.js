@@ -24,6 +24,7 @@ const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
 const ESLintPlugin = require('eslint-webpack-plugin');
+const { ModuleFederationPlugin } = webpack.container;
 const paths = require('./paths');
 const modules = require('./modules');
 const getClientEnvironment = require('./env');
@@ -71,6 +72,12 @@ const useTypeScript = fs.existsSync(paths.appTsConfig);
 // Check if Tailwind config exists
 const useTailwind = fs.existsSync(
   path.join(paths.appPath, 'tailwind.config.js')
+);
+
+// Check if Module Federation config exists
+const moduleFederationConfigPath = path.join(paths.appPath, 'modulefederation.config.js');
+const useModuleFederationPlugin = fs.existsSync(
+  moduleFederationConfigPath
 );
 
 // Get the path to the uncompiled service worker (if it exists).
@@ -835,6 +842,10 @@ module.exports = function (webpackEnv) {
             },
           },
         }),
+        useModuleFederationPlugin &&
+          new ModuleFederationPlugin(require(
+            moduleFederationConfigPath
+          )),
     ].filter(Boolean),
     // Turn off performance processing because we utilize
     // our own hints via the FileSizeReporter
