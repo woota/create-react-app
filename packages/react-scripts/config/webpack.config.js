@@ -19,6 +19,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
@@ -78,6 +79,12 @@ const useTailwind = fs.existsSync(
 const moduleFederationConfigPath = path.join(paths.appPath, 'modulefederation.config.js');
 const useModuleFederationPlugin = fs.existsSync(
   moduleFederationConfigPath
+);
+
+// Check if Monaco Editor config exists
+const monacoEditorConfigPath = path.join(paths.appPath, 'monaco-editor.config.js');
+const useMonacoEditorPlugin = fs.existsSync(
+  monacoEditorConfigPath
 );
 
 // Get the path to the uncompiled service worker (if it exists).
@@ -847,6 +854,8 @@ module.exports = function (webpackEnv) {
           new ModuleFederationPlugin(require(
             moduleFederationConfigPath
           )),
+        useMonacoEditorPlugin &&
+          new MonacoWebpackPlugin(require(monacoEditorConfigPath)),
     ].filter(Boolean),
     // Turn off performance processing because we utilize
     // our own hints via the FileSizeReporter

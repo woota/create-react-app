@@ -1,6 +1,6 @@
 {
   "name": "react-scripts-dbaas",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Configuration and scripts for Create React App.",
   "repository": {
     "type": "git",
@@ -76,7 +76,8 @@
     "webpack": "^5.64.4",
     "webpack-dev-server": "^4.6.0",
     "webpack-manifest-plugin": "^4.0.2",
-    "workbox-webpack-plugin": "^6.4.1"
+    "workbox-webpack-plugin": "^6.4.1",
+    "monaco-editor-webpack-plugin": "^7.0.1"
   },
   "devDependencies": {
     "react": "^18.0.0",
