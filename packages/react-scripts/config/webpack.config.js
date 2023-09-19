@@ -315,10 +315,7 @@ module.exports = function (webpackEnv) {
               // Turned on because emoji and regex is not minified properly using default
               // https://github.com/facebook/create-react-app/issues/2488
               ascii_only: true,
-            },
-            format: {
-              comments: false,
-            },
+            }
           },
           extractComments: false,
         }),
