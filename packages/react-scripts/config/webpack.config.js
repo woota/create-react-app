@@ -316,7 +316,11 @@ module.exports = function (webpackEnv) {
               // https://github.com/facebook/create-react-app/issues/2488
               ascii_only: true,
             },
+            format: {
+              comments: false,
+            },
           },
+          extractComments: false,
         }),
         // This is only used in production mode
         new CssMinimizerPlugin(),
